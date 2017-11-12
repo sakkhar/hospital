@@ -1,0 +1,45 @@
+<!-- Server Side Includes to pull in head html file -->
+{% include 'head.html' %}
+  <div class="row valign-wrapper" style="height: 100%">
+      <div class="col s12 m8 l6 push-m2 push-l3 valign">
+          <form class="col transparent " method="post" action="." style="width: 100%; max-width: 500px; margin: auto; float: none;">
+              {% csrf_token %}
+              <div class="card z-depth-4 grey lighten-5 ">
+                  <div class="card-content ">
+                      <span class="card-title">Login</span>
+
+                      <!--If statements that check the auth code returned from views and show error-->
+                      {% if authenticated == 2 %}
+                          <span class="red-text right">Invalid Login</span>
+                      {% elif authenticated == 1 %}
+                          <span class="red-text right">Account Inactive</span>
+                      {% endif %}
+
+                      <!-- username field -->
+                      <div class="input-field col s12">
+                          <input name="username" type="text" {% if authenticated == 2 or authenticated == 1 %} value="{{ username }}" {% endif %}  class="validate">
+                          <label for="username">Username</label>
+                      </div>
+
+                      <!-- password field -->
+                      <div class="input-field col s12">
+                          <input name="password" type="password"  class="validate">
+                          <label for="password">Password</label>
+                      </div>
+                  </div>
+
+                  <!-- form buttons -->
+                  <div class="card-action right-align" style="border: none;">
+                      <!-- submit button  -->
+                      <button class="btn waves-effect waves-light left white-text blue darken-1" style="padding-left: 15px" type="submit" name="action">Submit<i class="material-icons right">send</i></button>
+                      <!-- registration button -->
+                      <a class="btn waves-effect waves-light white-text blue darken-1"	href="/register">Register<i class="material-icons right">assignment</i></a>
+                  </div>
+              </div>
+          </form>
+      </div>
+  </div>
+
+<!-- Close the tags opened in head.html -->
+</body>
+</html>
